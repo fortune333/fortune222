@@ -1,17 +1,4 @@
 pragma solidity 0.4.26;
-
-/**
-*
-* Get your 2,22% every day profit with Fortune 222 Contract!
-* GitHub https://github.com/fortune333/fortune222
-* Site https://fortune333.online/
-*
-* With the refusal of ownership, without the human factor, on the most reliable blockchain in the world!
-* Only 5% for technical support and 10% for advertising!
-* The remaining 85% remain in the contract fund!
-* The world has never seen anything like it!
-*/
-
 /**
 * Get % profit every month with a Fortune 222 contract!
 * GitHub https://github.com/fortune333/fortune222
