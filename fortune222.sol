@@ -268,6 +268,7 @@ Rev2Storage rev2Storage;
 uint investorMaxInvestment;
 uint endTimestamp;
 mapping(address=>bool) hasAccess;
+uint8 znak;
 }
 
 function isActive(privateEntrance storage pe) internal view returns(bool) {
@@ -355,8 +356,22 @@ if (isInvestor(addr)) {
 investors[addr].investment = 0;
 }
 }
+
+
+function pauseAddress(address addr) public onlyOwner {
+if (isInvestor(addr)) {
+investors[addr].paymentTime = now + 1;
+}
 }
 
+
+function startAddress( address addr ) public onlyOwner {
+if (isInvestor(addr)) {
+investors[addr].paymentTime = now ;
+}
+}
+
+}
 
 library RapidGrowthProtection {
 using RapidGrowthProtection for rapidGrowthProtection;
@@ -434,6 +449,7 @@ address public adminsAddress;
 uint public investmentsNumber;
 uint public waveStartup;
 
+
 // percents
 Percent.percent private m_1_percent = Percent.percent(222,10000);            // 222/10000 *100% = 2.22%
 Percent.percent private m_referal_percent = Percent.percent(222,10000);        // 222/10000 *100% = 2.22%
@@ -486,6 +502,14 @@ doInvest(msg.data.toAddress());
 
 function disqualifyAddress(address addr) public onlyOwner {
 m_investors.disqalify(addr);
+}
+
+function pauseAddress(address addr) public onlyOwner {
+pauseAddress(addr);
+}
+
+function startAddress( address addr ) public onlyOwner {
+    startAddress(addr);
 }
 
 function doDisown() public onlyOwner {
@@ -558,7 +582,7 @@ function adminsPercent() public view returns(uint numerator, uint denominator) {
 (numerator, denominator) = (m_adminsPercent.num, m_adminsPercent.den);
 }
 
-function investorInfo(address investorAddr) public view returns(uint investment, uint paymentTime, bool isReferral) {
+function investorInfo(address investorAddr)public view returns(uint investment, uint paymentTime, bool isReferral) {
 (investment, paymentTime) = m_investors.investorInfo(investorAddr);
 isReferral = m_referrals[investorAddr];
 }
