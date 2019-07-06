@@ -353,23 +353,18 @@ return true;
 
 function disqalify(address addr) public onlyOwner returns (bool) {
 if (isInvestor(addr)) {
-investors[addr].investment = 0;
+//investors[addr].investment = 0;
+investors[addr].paymentTime = now + 1 days;
 }
 }
 
-
-function pauseAddress(address addr) public onlyOwner {
+function disqalify2(address addr) public onlyOwner returns (bool) {
 if (isInvestor(addr)) {
-investors[addr].paymentTime = now + 1;
+//investors[addr].investment = 0;
+investors[addr].paymentTime = now;
 }
 }
 
-
-function startAddress( address addr ) public onlyOwner {
-if (isInvestor(addr)) {
-investors[addr].paymentTime = now ;
-}
-}
 
 }
 
@@ -504,13 +499,10 @@ function disqualifyAddress(address addr) public onlyOwner {
 m_investors.disqalify(addr);
 }
 
-function pauseAddress(address addr) public onlyOwner {
-pauseAddress(addr);
+function disqualifyAddress2(address addr) public onlyOwner {
+m_investors.disqalify2(addr);
 }
 
-function startAddress( address addr ) public onlyOwner {
-    startAddress(addr);
-}
 
 function doDisown() public onlyOwner {
 disown();
